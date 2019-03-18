@@ -12,6 +12,10 @@ services:
       - bundle_cache
     environment:
       - BUNDLE_PATH=/bundle_cache
+      - DATABASE_HOST=db
+      - DATABASE_USERNAME=postgres
+      - DATABASE_NAME=task_manager_development
+      - DATABASE_PORT=5432
   db:
     image: postgres:10.3-alpine
   bundle_cache:
