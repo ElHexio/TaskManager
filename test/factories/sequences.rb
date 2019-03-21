@@ -9,7 +9,7 @@ FactoryBot.define do
     "Last name #{n}"
   end
   sequence :password do |n|
-    'secret'
+    "secret#{n}"
   end
   sequence :description do |n|
     "Description #{n}"
