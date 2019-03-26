@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ElHexio/TaskManager.svg?branch=develop)](https://travis-ci.org/ElHexio/TaskManager)
+
 # README
 
 This README would normally document whatever steps are necessary to get the
