@@ -1,24 +1,6 @@
-# README
+# Task Manager
+[![Build Status](https://travis-ci.org/ElHexio/TaskManager.svg?branch=develop)](https://travis-ci.org/ElHexio/TaskManager)
+[![Coverage Status](https://coveralls.io/repos/github/ElHexio/TaskManager/badge.svg?branch=master)](https://coveralls.io/github/ElHexio/TaskManager?branch=develop)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## About
+Full stack learning project by [Dualboot](https://fullstack-learning.firebaseapp.com).
