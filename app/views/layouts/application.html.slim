@@ -11,7 +11,7 @@ html lang="en"
 
   body
     ul.nav.navbar-nav
-      li= link_to "Board", "board_path"
+      li= link_to "Board", board_path
       - if current_user
         li= link_to current_user.first_name
         li= link_to "Log out", session_path, method: "delete", confirm: "confirm?", local: true
