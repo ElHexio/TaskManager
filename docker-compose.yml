@@ -16,6 +16,11 @@ services:
       - DATABASE_USERNAME=postgres
       - DATABASE_NAME=task_manager_development
       - DATABASE_PORT=5432
+      - CI=${CI}
+      - TRAVIS=${TRAVIS}
+      - TRAVIS_JOB_ID=${TRAVIS_JOB_ID}
+      - TRAVIS_BRANCH=${TRAVIS_BRANCH}
+      - TRAVIS_PULL_REQUEST=${TRAVIS_PULL_REQUEST}
   db:
     image: postgres:10.3-alpine
   bundle_cache:
