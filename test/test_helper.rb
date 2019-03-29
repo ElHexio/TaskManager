@@ -2,7 +2,6 @@ require 'coveralls'
 Coveralls.wear!
 
 require 'simplecov'
-SimpleCov.formatter = SimpleCov::Formatter::HTMLFormatter
 SimpleCov.start 'rails'
 
 ENV['RAILS_ENV'] ||= 'test'
