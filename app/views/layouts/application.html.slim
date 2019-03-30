@@ -4,7 +4,7 @@ html lang="en"
     meta charset="utf-8"
     meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
-    title= content_for?(:title) ? yield(:title) : "Tutorial_project"
+    title= content_for?(:title) ? yield(:title) : "Task Manager"
     = csrf_meta_tags
     = stylesheet_link_tag "application", :media => "all"
     = javascript_include_tag "application"
@@ -28,7 +28,7 @@ html lang="en"
         .col-lg-3
           ul.nav.navbar-nav
             -if current_user
-              li= current_user.name
+              li.navbar-text= current_user.name
               li= link_to "Log out", session_path, method: "delete"
             -else
               li= link_to "Sign in", new_session_path
@@ -42,4 +42,4 @@ html lang="en"
 
     footer
       p
-      p &copy; Company 2018
+      p &copy; Company 2019
