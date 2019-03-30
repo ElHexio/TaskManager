@@ -2,11 +2,17 @@ admin = Admin.find_or_create_by(first_name: 'admin', last_name: 'admin', email: 
 admin.password = 'admin'
 admin.save
 
+USER_TYPES = [Manager, Developer].freeze
+
 60.times do |i|
-  u = [Manager, Developer].sample.new
-  u.email = "email#{i}@mail.gen"
-  u.first_name = "FN#{i}"
-  u.last_name = "LN#{i}"
-  u.password = "#{i}"
-  u.save
+  user_attrs = {
+    email: "email#{i}@example.com",
+    first_name: "FN#{i}",
+    last_name: "LN#{i}",
+  }
+
+  index = i.odd? ? 0 : 1
+  user = USER_TYPES[index].find_or_create_by(user_attrs)
+  user.password = "#{i}"
+  user.save
 end

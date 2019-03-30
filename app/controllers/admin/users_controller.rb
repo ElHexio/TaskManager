@@ -2,15 +2,12 @@ class Admin::UsersController < Admin::ApplicationController
 
   before_action :set_user, only: %i[show edit update destroy]
 
-  def show
-  end
-
   def index
     @query = User.ransack(params[:q])
     @users = @query.result.order(:type).order(:id).page(params[:page]).per(10)
   end
 
-  def edit
+  def show
   end
 
   def new
@@ -24,6 +21,9 @@ class Admin::UsersController < Admin::ApplicationController
     else
       render :new
     end
+  end
+
+  def edit
   end
 
   def update
