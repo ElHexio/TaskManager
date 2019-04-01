@@ -1,0 +1,2 @@
+class DeveloperPresenter < UserPresenter
+end

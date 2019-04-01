@@ -1,0 +1,2 @@
+class ManagerPresenter < UserPresenter
+end
