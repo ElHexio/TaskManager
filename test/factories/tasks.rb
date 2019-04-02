@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :task do
     name { generate :string }
     description
-    author { create :manager }
-    assignee { create :developer }
+    author_id { create :manager }
+    assignee_id { create :developer }
   end
 end
