@@ -53,5 +53,4 @@ class Api::V1::TasksControllerTest < ActionController::ApiTestCase
 
     assert !Task.where(id: task.id).exists?
   end
-
 end

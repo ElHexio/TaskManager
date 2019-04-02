@@ -1,4 +1,7 @@
 class Api::V1::TasksController < Api::V1::ApplicationController
+
+  before_action :set_task, only: %i[show update destroy]
+
   respond_to :json
 
   def index
@@ -11,7 +14,7 @@ class Api::V1::TasksController < Api::V1::ApplicationController
                 .per(params[:per_page])
 
     json = {
-      items: tasks.map { |t| TaskSerializer.new(t).as_json },
+      items: tasks.map { |task| TaskSerializer.new(task).as_json },
       meta: build_meta_tasks(tasks)
     }
 
@@ -19,8 +22,7 @@ class Api::V1::TasksController < Api::V1::ApplicationController
   end
 
   def show
-    task = Task.find(params[:id])
-    respond_with(task)
+    respond_with(@task)
   end
 
   def create
@@ -34,25 +36,26 @@ class Api::V1::TasksController < Api::V1::ApplicationController
   end
 
   def update
-    task = Task.find(params[:id])
-
-    if task.update(task_params)
-      render(json: task)
+    if @task.update(task_params)
+      render(json: @task)
     else
-      render(json: { errors: task.errors }, status: :unprocessable_entity)
+      render(json: { errors: @task.errors }, status: :unprocessable_entity)
     end
   end
 
   def destroy
-    task = Task.find(params[:id])
-    if task.destroy
+    if @task.destroy
       head(:ok)
     else
-      render(json: { errors: task.errors }, status: :unprocessable_entity)
+      render(json: { errors: @task.errors }, status: :unprocessable_entity)
     end
   end
 
   private
+
+  def set_task
+    @task = Task.find(params[:id])
+  end
 
   def task_params
     params.require(:task).permit(:name, :description, :author_id, :assignee_id, :state_event)
