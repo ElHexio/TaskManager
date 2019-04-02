@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Api::V1::TasksControllerTest < ActionController::TestCase
+class Api::V1::TasksControllerTest < ActionController::ApiTestCase
 
   test "should get show" do
     author = create :manager
@@ -15,7 +15,7 @@ class Api::V1::TasksControllerTest < ActionController::TestCase
   end
 
   test 'should post create' do
-    author = create :manage
+    author = create :manager
     sign_in(author)
     assignee = create :developer
     task_attributes = attributes_for(:task)

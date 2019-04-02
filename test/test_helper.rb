@@ -32,3 +32,7 @@ end
 class ActionDispatch::IntegrationTest
   include SignInHelper
 end
+
+class ActionController::ApiTestCase < ActionController::TestCase
+  include Concerns::AuthHelper
+end
