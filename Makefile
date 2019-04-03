@@ -1,11 +1,11 @@
 install:
-	npm install && yarn install
+	yarn install
 
 app-bash:
 	docker-compose run --rm --service-ports web /bin/bash
 
 lint:
-	./node_modules/.bin/eslint app/assets/javascripts/
+	./node_modules/.bin/eslint app/javascript/
 
 lint-fix:
-	./node_modules/.bin/eslint --fix app/assets/javascripts/
+	./node_modules/.bin/eslint --fix app/javascript/
