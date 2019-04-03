@@ -1,3 +1,6 @@
+install:
+	npm install && yarn install
+
 app-bash:
 	docker-compose run --rm --service-ports web /bin/bash
 
