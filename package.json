@@ -27,5 +27,9 @@
     "eslint-plugin-sonarjs": "^0.3.0",
     "prettier": "^1.16.4",
     "webpack-dev-server": "2.11.2"
+  },
+  "scripts": {
+    "lint": "eslint app/javascript",
+    "lint-fix": "eslint --fix app/javascript"
   }
 }
