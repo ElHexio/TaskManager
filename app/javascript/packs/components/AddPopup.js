@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetch } from './Fetch';
+import { fetch } from '../utils/Fetch';
 import { Modal, Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
 export default class AppPopup extends React.Component {
@@ -23,7 +23,7 @@ export default class AppPopup extends React.Component {
   }
 
   handleCardAdd = () => {
-    fetch('POST', window.Routes.api_v1_tasks_path(), {
+    fetch('POST', Routes.api_v1_tasks_path(), {
       task: {
         name: this.state.name,
         description: this.state.description,
