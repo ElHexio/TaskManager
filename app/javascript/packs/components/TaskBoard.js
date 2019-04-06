@@ -1,5 +1,6 @@
 import React from 'react';
 import Board from 'react-trello';
+import LaneHeader from './LaneHeader';
 import { fetch } from './Fetch';
 
 export default class TasksBoard extends React.Component {
@@ -72,12 +73,21 @@ export default class TasksBoard extends React.Component {
       })).then(({ data }) => data);
     }
 
+    onLaneScroll = (requestedPage, state) => this.fetchLine(state, requestedPage).then(({ items }) => items.map(task => ({
+      ...task,
+      label: task.state,
+      title: task.name,
+    })))
+
     render() {
       return (
         <div>
           <h1>Your tasks</h1>
           <Board
+            onLaneScroll={this.onLaneScroll}
             data={this.getBoard()}
+            customLaneHeader={<LaneHeader />}
+            cardsMeta={this.state}
           />
         </div>
       );
