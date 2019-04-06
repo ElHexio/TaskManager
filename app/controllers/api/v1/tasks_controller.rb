@@ -16,7 +16,7 @@ class Api::V1::TasksController < Api::V1::ApplicationController
       meta: build_meta(tasks)
     }
 
-    respond_with json
+    respond_with(json)
   end
 
   def show

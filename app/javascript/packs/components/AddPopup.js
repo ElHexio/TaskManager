@@ -1,37 +1,44 @@
 import React from 'react';
 import { fetch } from '../utils/Fetch';
+import UserSelect from './UserSelect';
 import { Modal, Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
 export default class AppPopup extends React.Component {
   state = {
-    name: '',
-    description: '',
-    assignee: {
-      id: null,
-      first_name: null,
-      last_name:  null,
-      email: null
+    task: {
+      name: '',
+      description: '',
+      assignee: {
+        id: null,
+        first_name: null,
+        last_name:  null,
+        email: null
+      }
     }
   }
 
   handleNameChange = (e) => {
-    this.setState({ name: e.target.value });
+    this.setState({ task: { ...this.state.task, name: e.target.value } });
   }
 
   handleDecriptionChange = (e) => {
-    this.setState({ description: e.target.value });
+    this.setState({ task: { ...this.state.task, description: e.target.value } });
   }
 
   handleCardAdd = () => {
     fetch('POST', Routes.api_v1_tasks_path(), {
       task: {
-        name: this.state.name,
-        description: this.state.description,
-        assignee_id: this.state.assignee.id
+        name: this.state.task.name,
+        description: this.state.task.description,
+        assignee_id: this.state.task.assignee.id
       }
     }).then(() => {
         this.props.onClose(true);
     });
+  }
+
+  handleAssigneeChange = (value) => {
+    this.setState({ task: { ...this.state.task, assignee: value }});
   }
 
   render () {
@@ -49,7 +56,7 @@ export default class AppPopup extends React.Component {
               <ControlLabel type="text">Task name:</ControlLabel>
               <FormControl
                 type="text"
-                value={this.state.name}
+                value={this.state.task.name}
                 placeholder='Set the name for the task'
                 onChange={this.handleNameChange}
               />
@@ -58,9 +65,17 @@ export default class AppPopup extends React.Component {
               <ControlLabel>Task description:</ControlLabel>
               <FormControl
                 componentClass="textarea"
-                value={this.state.description}
+                value={this.state.task.description}
                 placeholder='Set the description for the task'
                 onChange={this.handleDecriptionChange}
+              />
+            </FormGroup>
+            <FormGroup controlId="formAssignee">
+              <ControlLabel type="text">Assignee:</ControlLabel>
+              <UserSelect
+                id="Assignee"
+                onChange={this.handleAssigneeChange}
+                value={this.state.task.assignee}
               />
             </FormGroup>
           </form>
