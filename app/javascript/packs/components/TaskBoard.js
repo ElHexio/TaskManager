@@ -88,7 +88,7 @@ export default class TasksBoard extends React.Component {
 
   fetchLine(state, page = 1) {
     let params = {q: { state_eq: state }, page, per_page: 10, format: 'json'};
-    let tasks_url = window.Routes.api_v1_tasks_path(params);
+    let tasks_url = Routes.api_v1_tasks_path(params);
 
     return fetch('GET', tasks_url)
       .then(({ data }) => data);
@@ -107,7 +107,7 @@ export default class TasksBoard extends React.Component {
   }
 
   handleDragEnd = (cardId, sourceLaneId, targetLaneId) => {
-    let update_task_url = window.Routes.api_v1_task_path(cardId, { format: 'json' });
+    let update_task_url = Routes.api_v1_task_path(cardId, { format: 'json' });
     let body = { task: { state_event: this.getStateEventName(targetLaneId) } };
 
     fetch('PUT', update_task_url, body)
@@ -121,7 +121,7 @@ export default class TasksBoard extends React.Component {
     this.setState({ addPopupShow: true });
   }
 
-  handleAddClose = ( added = false ) => {
+  handleAddClose = (added = false) => {
     this.setState({ addPopupShow: false });
     if (added == true) {
       this.loadLine('new_task');
@@ -150,9 +150,7 @@ export default class TasksBoard extends React.Component {
     }
   }
 
-  handleEditShow = () => {
-    this.setState({ editPopupShow: true });
-  }
+  handleEditShow = () => this.setState({ editPopupShow: true });
 
   render() {
     return (

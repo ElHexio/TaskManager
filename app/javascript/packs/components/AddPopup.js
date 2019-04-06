@@ -23,7 +23,7 @@ export default class AppPopup extends React.Component {
   }
 
   handleCardAdd = () => {
-    fetch('POST', window.Routes.api_v1_tasks_path(), {
+    fetch('POST', Routes.api_v1_tasks_path(), {
       task: {
         name: this.state.name,
         description: this.state.description,
