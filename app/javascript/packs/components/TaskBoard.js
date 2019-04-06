@@ -3,11 +3,14 @@ import Board from 'react-trello';
 import { Button } from 'react-bootstrap';
 import { fetch } from './Fetch';
 import AddPopup from './AddPopup';
+import EditPopup from './EditPopup';
 import LaneHeader from './LaneHeader';
 
 export default class TasksBoard extends React.Component {
   state = {
     addPopupShow: false,
+    editPopupShow: false,
+    editCardId: null,
     board: {
       new_task: null,
       in_development: null,
@@ -125,6 +128,32 @@ export default class TasksBoard extends React.Component {
     };
   }
 
+  onCardClick = (cardId) => {
+    this.setState({editCardId: cardId});
+    this.handleEditShow();
+  }
+
+  handleEditClose = (edited = '') => {
+    this.setState({ editPopupShow: false, editCardId: null});
+    switch (edited) {
+      case 'new_task':
+      case 'in_development':
+      case 'in_qa':
+      case 'in_code_review':
+      case 'ready_for_release':
+      case 'released':
+      case 'archived':
+        this.loadLine(edited);
+        break;
+      default:
+        break;
+    }
+  }
+
+  handleEditShow = () => {
+    this.setState({ editPopupShow: true });
+  }
+
   render() {
     return (
       <div>
@@ -139,11 +168,18 @@ export default class TasksBoard extends React.Component {
           data={this.getBoard()}
           customLaneHeader={<LaneHeader />}
           cardsMeta={this.state}
+          onCardClick={this.onCardClick}
         />
 
         <AddPopup
           show = {this.state.addPopupShow}
           onClose={this.handleAddClose}
+        />
+
+        <EditPopup
+          show = {this.state.editPopupShow}
+          onClose={this.handleEditClose}
+          cardId ={this.state.editCardId}
         />
       </div>
     );
