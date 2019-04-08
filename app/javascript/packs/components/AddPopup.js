@@ -2,6 +2,8 @@ import React from 'react';
 import { fetch } from '../utils/Fetch';
 import { Modal, Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
+const STATUS_CREATED = 201;
+
 export default class AppPopup extends React.Component {
   state = {
     name: '',
@@ -29,12 +31,14 @@ export default class AppPopup extends React.Component {
         description: this.state.description,
         assignee_id: this.state.assignee.id
       }
-    }).then( response => {
-      if (response.statusText == 'Created') {
+    }).then(response => {
+      if (response.status === STATUS_CREATED) {
         this.props.onClose(true);
       } else {
-        alert(response.status + ' - ' + response.statusText);
+        alert([response.status, response.statusText].join(' - '));
       }
+    }).catch(({response}) => {
+      alert(response.data.errors.join('; '));
     });
   }
 

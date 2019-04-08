@@ -133,7 +133,7 @@ export default class TasksBoard extends React.Component {
   }
 
   handleEditClose = (edited = '') => {
-    this.setState({ editPopupShow: false, editCardId: null});
+    this.setState({ editPopupShow: false });
     switch (edited) {
       case 'new_task':
       case 'in_development':
@@ -174,9 +174,10 @@ export default class TasksBoard extends React.Component {
         />
 
         <EditPopup
-          show = {this.state.editPopupShow}
+          key={this.state.editCardId}
+          show={this.state.editPopupShow}
           onClose={this.handleEditClose}
-          cardId ={this.state.editCardId}
+          cardId={this.state.editCardId}
         />
       </div>
     );
