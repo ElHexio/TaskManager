@@ -38,7 +38,6 @@ export default class TasksBoard extends React.Component {
     return {
       id,
       title,
-      state_event,
       total_count: (tasks) ? tasks.meta.total_count : 'None',
       cards: (tasks) ? tasks.items.map(task => ({
         ...task,
@@ -53,13 +52,13 @@ export default class TasksBoard extends React.Component {
   getBoard() {
     return {
       lanes: [
-        this.generateLane('new_task', 'New', this.getStateEventName('new_task')),
-        this.generateLane('in_development', 'In Dev', this.getStateEventName('in_development')),
-        this.generateLane('in_qa', 'In QA', this.getStateEventName('in_qa',)),
-        this.generateLane('in_code_review', 'In CR', this.getStateEventName('in_code_review')),
-        this.generateLane('ready_for_release', 'Ready for release', this.getStateEventName('ready_for_release')),
-        this.generateLane('released', 'Released', this.getStateEventName('released',)),
-        this.generateLane('archived', 'Archived', this.getStateEventName('archived')),
+        this.generateLane('new_task', 'New'),
+        this.generateLane('in_development', 'In Dev'),
+        this.generateLane('in_qa', 'In QA'),
+        this.generateLane('in_code_review', 'In CR'),
+        this.generateLane('ready_for_release', 'Ready for release'),
+        this.generateLane('released', 'Released'),
+        this.generateLane('archived', 'Archived'),
       ],
     };
   }

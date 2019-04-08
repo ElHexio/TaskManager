@@ -27,23 +27,24 @@ export default class EditPopup extends React.Component {
 
   loadCard = (cardId) => {
     this.setState({ isLoading: true });
-    fetch('GET', Routes.api_v1_task_path(cardId, {format: 'json'})).then(({data}) => {
-      this.setState({ task: data});
-      this.setState({ isLoading: false });
-    });
+    fetch('GET', Routes.api_v1_task_path(cardId, {format: 'json'}))
+      .then(({data}) => {
+        this.setState({ task: data});
+        this.setState({ isLoading: false });
+      });
   }
 
   componentDidUpdate (prevProps) {
     if (this.props.cardId != null && this.props.cardId !== prevProps.cardId) {
       this.loadCard(this.props.cardId);
-    };
+    }
   }
 
   handleNameChange = (e) => {
     this.setState({ task: { ...this.state.task, name: e.target.value }});
   }
 
-  handleDecriptionChange = (e) => {
+  handleDescriptionChange = (e) => {
     this.setState({ task: { ...this.state.task, description: e.target.value }});
   }
 
@@ -57,8 +58,7 @@ export default class EditPopup extends React.Component {
     }).then( response => {
       if (response.statusText == 'OK') {
         this.props.onClose(this.state.task.state);
-      }
-      else {
+      } else {
         alert('Update failed! ' + response.status + ' - ' + response.statusText);
       }
     });
@@ -69,8 +69,7 @@ export default class EditPopup extends React.Component {
       .then( response => {
         if (response.statusText == 'OK') {
           this.props.onClose(this.state.task.state);
-        }
-        else {
+        } else {
           alert('DELETE failed! ' + response.status + ' - ' + response.statusText);
         }
       });
@@ -121,7 +120,7 @@ export default class EditPopup extends React.Component {
                   componentClass="textarea"
                   value={this.state.task.description}
                   placeholder='Set the description for the task'
-                  onChange={this.handleDecriptionChange}
+                  onChange={this.handleDescriptionChange}
                 />
               </FormGroup>
             </form>
