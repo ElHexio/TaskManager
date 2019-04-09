@@ -65,7 +65,7 @@ export default class EditPopup extends React.Component {
         alert([response.status, response.statusText].join(' - '));
       }
     }).catch(({response}) => {
-      alert(response.data.errors.join('; '));
+      // alert(response.data.errors.join('; '));
     });
   }
 
