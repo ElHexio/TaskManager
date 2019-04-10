@@ -86,8 +86,8 @@ export default class TasksBoard extends React.Component {
   }
 
   fetchLine(state, page = 1) {
-    let params = {q: { state_eq: state }, page, per_page: 10, format: 'json'};
-    let tasks_url = Routes.api_v1_tasks_path(params);
+    const params = {q: { state_eq: state }, page, per_page: 10, format: 'json'};
+    const tasks_url = Routes.api_v1_tasks_path(params);
 
     return fetch('GET', tasks_url)
       .then(({ data }) => data);
@@ -106,8 +106,8 @@ export default class TasksBoard extends React.Component {
   }
 
   handleDragEnd = (cardId, sourceLaneId, targetLaneId) => {
-    let update_task_url = Routes.api_v1_task_path(cardId, { format: 'json' });
-    let body = { task: { state_event: this.getStateEventName(targetLaneId) } };
+    const update_task_url = Routes.api_v1_task_path(cardId, { format: 'json' });
+    const body = { task: { state_event: this.getStateEventName(targetLaneId) } };
 
     fetch('PUT', update_task_url, body)
       .then(() => {

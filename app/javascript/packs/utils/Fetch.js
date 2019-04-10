@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { initInterceptResponseHandler } from './FetchHelper';
 
 export function authenticityToken() {
   const token = document.querySelector('meta[name="csrf-token"]');
@@ -14,29 +15,15 @@ function headers() {
   };
 }
 
-axios.interceptors.response.use(function (response) {
-  let isResponseSuccessful = response.config.validateStatus(response.status);
-  if (isResponseSuccessful) {
-    return response;
-  }
+initInterceptResponseHandler(axios);
 
-  // show notification and return nothing, or use custom response handler instead
-  alert([response.status, response.statusText].join(' - '));
-}, function (error) {
-  let { response } = error;
-  if (response.data && response.data.errors) {
-    alert(response.data.errors.join('; '));
-  }
-
-  return Promise.reject(error);
-});
-
-export function fetch(method, url, body) {
+export function fetch(method, url, body, interceptResponseErrors = true) {
   const options = {
     method,
     headers: headers(),
     data: body,
     url,
+    interceptResponseErrors
   };
 
   return axios(options);

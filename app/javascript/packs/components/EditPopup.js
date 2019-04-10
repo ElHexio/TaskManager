@@ -2,8 +2,6 @@ import React from 'react';
 import { Modal, Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 import { fetch } from '../utils/Fetch';
 
-const STATUS_SUCCESS = 200;
-
 export default class EditPopup extends React.Component {
   state = {
     task: {
@@ -58,27 +56,15 @@ export default class EditPopup extends React.Component {
       author_id: this.state.task.author.id,
       assignee_id: this.state.task.assignee.id,
       state: this.state.task.state
-    }).then(response => {
-      if (response.status === STATUS_SUCCESS) {
+    }).then(() => {
         this.props.onClose(true);
-      } else {
-        alert([response.status, response.statusText].join(' - '));
-      }
-    }).catch(({response}) => {
-      // alert(response.data.errors.join('; '));
     });
   }
 
   handleCardDelete = () => {
     fetch('DELETE', Routes.api_v1_task_path(this.props.cardId, { format: 'json' }))
-      .then(response => {
-        if (response.status === STATUS_SUCCESS) {
+      .then(() => {
           this.props.onClose(true);
-        } else {
-          alert([response.status, response.statusText].join(' - '));
-        }
-      }).catch(({response}) => {
-        alert(response.data.errors.join('; '));
       });
   }
 
