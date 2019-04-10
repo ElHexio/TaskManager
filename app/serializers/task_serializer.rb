@@ -5,8 +5,4 @@ class TaskSerializer < ActiveModel::Serializer
   belongs_to :author
   belongs_to :assignee
 
-  def id
-    object.id.to_s
-  end
-
 end

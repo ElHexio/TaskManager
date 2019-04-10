@@ -2,42 +2,38 @@ import React, { Component } from 'react';
 import AsyncPaginate from 'react-select-async-paginate';
 import { fetch } from '../utils/Fetch';
 
-
 export default class UserSelect extends Component {
   state = {
     inputValue: '',
   }
 
   getOptionLabel = (option) => {
-    let { first_name, last_name } = option;
-    let fullName = `${first_name} ${last_name}`;
-    return fullName;
+    const { first_name, last_name } = option;
+    return `${first_name} ${last_name}`;
   }
 
-  getOptionValue = (option) => {
-    return option.id
-  }
+  getOptionValue = option => option.id
 
   loadOptions = (search, loadedOptions, { page, per_page }) => {
-    let users_url = Routes.api_v1_users_path({
+    const usersUrl = Routes.api_v1_users_path({
       q: {
-        first_name_or_last_name_cont: search
+        first_name_or_last_name_cont: search,
       },
       page,
       per_page,
-      format: 'json'
+      format: 'json',
     });
 
-    return fetch('GET', users_url)
-      .then(({data}) => {
-        let { current_page, total_pages } = data.meta;
-        let hasMore = current_page < total_pages;
+    return fetch('GET', usersUrl)
+      .then(({ data }) => {
+        const { current_page, total_pages } = data.meta;
+        const hasMore = current_page < total_pages;
         return {
           options: data.items,
           hasMore,
           additional: {
             page: hasMore ? page + 1 : page,
-            per_page
+            per_page,
           },
         };
       });
@@ -50,18 +46,20 @@ export default class UserSelect extends Component {
   }
 
   render() {
+    const { value, isDisabled, onChange } = this.props;
+
     return (
       <div>
         <AsyncPaginate
           cacheOptions
-          value={this.props.value}
+          value={value}
           loadOptions={this.loadOptions}
           debounceTimeout={500}
           defaultOptions
           getOptionLabel={this.getOptionLabel}
           getOptionValue={this.getOptionValue}
-          isDisabled={this.props.isDisabled}
-          onChange={this.props.onChange}
+          isDisabled={isDisabled}
+          onChange={onChange}
           additional={{
             page: 1,
             per_page: 10,
