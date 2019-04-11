@@ -16,3 +16,17 @@ USER_TYPES = [Manager, Developer].freeze
   user.password = "#{i}"
   user.save
 end
+
+20.times do |i|
+  manager_ids = Manager.all.select(:id).pluck(:id)
+  developer_ids = Developer.all.select(:id).pluck(:id)
+
+  task_attrs = {
+    name: "Task #{i}",
+    description: "Description #{i}",
+    author_id: manager_ids.sample,
+    assignee_id: developer_ids.sample
+  }
+
+  task = Task.find_or_create_by(task_attrs)
+end
